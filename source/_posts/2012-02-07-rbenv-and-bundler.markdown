@@ -25,10 +25,10 @@ eval "$(rbenv init -)"
 
 New versions of Ruby are installed into `~/.rbenv/versions/`. The default method for doing so is to fetch, build and install yourself. Personally my days of typing `./configure && make && make install` commands are over. Thankfully there is a [ruby-build](https://github.com/sstephenson/ruby-build) plugin that provides routines for common Ruby versions and an easy `rbenv install` command.
 
-There is no need to install this into your system `/usr/local` directory as the README suggests. It's sufficient and probably cleaner to place the definitions and binary into your existing rbenv install.
+There's no need to install this into your system `/usr/local` directory as the README suggests. Instead create an rbenv plugins directory and clone the project into there. Same rules about working from a tag or HEAD apply.
 
-    git clone git://github.com/sstephenson/ruby-build.git
-    PREFIX=~/.rbenv ./ruby-build/install.sh
+    mkdir ~/.rbenv/plugins
+    git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
 You will obviously need a compiler to build Ruby. On Debian and Ubuntu you can use a single meta-package to install `gcc`, `make`, `libc-dev`, etc.
 
@@ -61,7 +61,6 @@ The last part of the puzzle for me was separation of per-project Gem installs. I
 
 [rbenv-bundler](https://github.com/carsomyr/rbenv-bundler) is a near-invaluable plugin that makes the rbenv shims Bundler-aware and alleviates you from needing to type `bundler exec` in front of every command. It is also easy to install straight from Github.
 
-    mkdir ~/.rbenv/plugins
     git clone git://github.com/carsomyr/rbenv-bundler.git ~/.rbenv/plugins/bundler
 
 Bundler is the only Gem that you need install the traditional way. You will need to do this once for each version of Ruby that you have. The rehash command updates the shim for the bundle binary.

@@ -147,4 +147,4 @@ Vagrant version 0.9.5
 
 As a final step I wanted to make sure that my system was free of any globally installed Gems from the dark days of `sudo gem install`. I don't have any need for these on my workstation. But you should double check before doing the same.
 
-    /usr/bin/gem list --no-versions | xargs sudo gem uninstall
+    /usr/bin/gem list --no-versions | xargs sudo /usr/bin/gem uninstall

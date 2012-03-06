@@ -8,11 +8,11 @@ categories: dev ruby
 
 In the name of practising-what-you-preach, I like to be in the habit of configuring my Linux workstations with Puppet in the same way that I do for servers. Though I confess I have fallen out of habit recently and accumulated a bunch of tools that haven't made it back to the manifests. Having just trashed my laptop, in an unrelated incident, I fancied the opportunity to check out [chef-solo](http://wiki.opscode.com/display/chef/Chef+Solo) for bringing a fresh install of Mint Linux up to speed.
 
-The Chef package currently available from Ubuntu's own package repositories is version 0.8, but I wanted to use the latest and greatest 0.10. That's simple to solve with my new-found love for rbenv and Bundler. Except one hitch - both `chef-solo` and it's cousin `puppet apply` need to be run as root in order to manage system resources.
+The Chef package currently available from Ubuntu's own package repositories is version 0.8, but I wanted to use the latest and greatest 0.10. That's simple to solve with my new-found love for rbenv and Bundler. Except one hitch - both `chef-solo` and it's cousin `puppet apply` need to be run as root in order to manage system resources. As it turns out rbenv [wasn't](https://github.com/sstephenson/rbenv/issues/60) [designed](https://github.com/sstephenson/rbenv/issues/127) to be run through `sudo`.
 
 ## First attempts
 
-If we simply run it with `sudo` then it unsurprisingly fails to find the `chef-solo` binary:
+If we attempt to run `chef-solo` then it unsurprisingly fails to find the binary:
 
 ``` sh
 $ sudo chef-solo --version

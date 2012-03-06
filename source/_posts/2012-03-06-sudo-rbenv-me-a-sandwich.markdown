@@ -8,7 +8,7 @@ categories: dev ruby
 
 In the name of practising-what-you-preach, I like to be in the habit of configuring my Linux workstations with Puppet in the same way that I do for servers. Though I confess I have fallen out of habit recently and accumulated a bunch of tools that haven't made it back to the manifests. Having just trashed my laptop, in an unrelated incident, I fancied the opportunity to check out [chef-solo](http://wiki.opscode.com/display/chef/Chef+Solo) for bringing a fresh install of Mint Linux up to speed.
 
-The Chef package currently available from Ubuntu's own package repositories is version 0.8, but I wanted to use the latest and greatest 0.10. That's simple to solve with my new-found love for rbenv and Bundler. Except one hitch - both `chef-solo` and it's cousin `puppet apply` need to be run as `root` in order to manage system resources.
+The Chef package currently available from Ubuntu's own package repositories is version 0.8, but I wanted to use the latest and greatest 0.10. That's simple to solve with my new-found love for rbenv and Bundler. Except one hitch - both `chef-solo` and it's cousin `puppet apply` need to be run as root in order to manage system resources.
 
 ## First attempts
 
@@ -120,7 +120,7 @@ hello
 
 ## Final solution
 
-rbenv provides us with two niceties to wrap this up with. The first is plugin support which means that instead of using a Bash function we can create a sub-command of `rbenv sudo` simply by dropping a shell script into the right place. Furthermore all rbenv plugins have access to an `RBENV_ROOT` variable which saves us from calling out to `$(rbenv root)`. So we're left with the following code:
+rbenv provides us with two niceties to wrap this up with. The first is plugin support which means that instead of using a Bash function we can create a sub-command called `rbenv sudo` simply by dropping a shell script into the right place. Furthermore all rbenv plugins have access to an `RBENV_ROOT` variable which saves us from calling out to `$(rbenv root)`. So we're left with the following code:
 
 ``` sh ~/.rbenv/plugins/rbenv-sudo/bin/rbenv-sudo
 # Bail on all errors and undefined variables.

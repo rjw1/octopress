@@ -47,7 +47,7 @@ Value to override user's $PATH with: /usr/local/sbin:/usr/local/bin:/usr/sbin:/u
 
 If you search around a little you'll find a handful of people complaining that this is a "bug" or "annoying feature" of some OSs like Ubuntu. On the contrary, it is there to protect you. Those predefined paths are considered safe because only the root user can drop new binaries into those locations. If your normal PATH variable has questionable contents like `./`, intentionally or otherwise, then they could supersede normal system binaries and be unwittingly executed as a privileged user.
 
-Do not, whatever you do, disable this feature with `!secure_path`. It's enabled by default for a good reason. You can subvert it by resetting the variable for a given command. This is what the `rvmsudo` function provided by RVM does to pass a variety of environment variables over regardless of `secure_path` and `env_reset`. It's not ideal though.
+Do not, whatever you do, disable this feature with `!secure_path`. It's enabled by default for a good reason. You can subvert it by resetting the variable for a given command with `env`. This is what the [rvmsudo](https://github.com/wayneeseguin/rvm/blob/master/binscripts/rvmsudo) function provided by RVM does to pass a variety of environment variables over regardless of `secure_path` and `env_reset`. It's not ideal though.
 
 ## More attempts
 

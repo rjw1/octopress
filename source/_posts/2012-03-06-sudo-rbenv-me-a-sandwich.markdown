@@ -118,7 +118,7 @@ $ rbsudo ruby -e 'puts "hello"'
 hello
 ```
 
-## Final solution
+## Solution
 
 rbenv provides us with two niceties to wrap this up with. The first is plugin support which means that instead of using a Bash function we can create a sub-command called `rbenv sudo` simply by dropping a shell script into the right place. Furthermore all rbenv plugins have access to an `RBENV_ROOT` variable which saves us from calling out to `$(rbenv root)`. So we're left with the following code:
 

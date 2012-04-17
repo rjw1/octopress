@@ -25,7 +25,7 @@ The requirements for our image were as follows:
 
 Jeremy's original use was intended for CentOS 5 as S3 backed instance-store images. This required some code changes. Most of which have been submitted upstream, but are all available in [this branch](https://github.com/dcarley/ami-creator/tree/ebs).
 
-My resulting kickstart file and some SELinux specific changes are described further below.
+My resulting kickstart file and some SELinux specific changes are described further below. You can find the complete [kickstart file on Github](https://github.com/dcarley/ami-creator/blob/dcarley/ks-centos6.cfg).
 
 ## Create master with Fog
 
@@ -95,7 +95,7 @@ We need to break two cardinal rules while building the image. Firstly the whole 
 
 Grab a copy of ami-creator. Presently from my own branch.
 
-    git clone -b ebs git://github.com/dcarley/ami-creator.git
+    git clone -b dcarley git://github.com/dcarley/ami-creator.git
 
 ## Create image
 

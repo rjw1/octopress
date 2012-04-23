@@ -49,7 +49,7 @@ Next we define some variables that will remain constant throughout. AMIs are tie
 @ami_name   = "centos62-x86_64"
 
 require 'fog'
-f = Fog::Compute.new(
+fog = Fog::Compute.new(
     :provider => "AWS",
     :region => @region
 )

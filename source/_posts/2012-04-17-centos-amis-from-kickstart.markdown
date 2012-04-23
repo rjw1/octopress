@@ -69,7 +69,7 @@ f16ami = fog.images.all("image-id" => "ami-2df4c959").first
 master = fog.servers.create(
     :tags => {"Name" => "amimaster"},
     :flavor_id => "m1.small",
-    :image_id => f16ami.id
+    :image_id => f16ami.id,
     :key_name => @key_name,
     :availability_zone => @av_zone
 )
@@ -83,10 +83,10 @@ SSH into the public hostname of your new instance with the username `ec2-user` a
 Install some dependencies that we're going to use during the build process.
 
     sudo yum install \
-        git                         # To fetch ami-creator  \
-        python-imgcreate            # To build our image \
-        compat-db45                 # To rebuild CentOS 5 RPM DBs \
-        compat-db47                 # To rebuild CentOS 6 RPM DBs
+        git \
+        python-imgcreate \
+        compat-db45 \
+        compat-db47
 
 We need to break two cardinal rules while building the image. Firstly the whole process must be run as root due to the various mounts and chroots. Secondly we have to flip SELinux into `permissive` mode due to some [problems with livecd-tools](https://bugzilla.redhat.com/show_bug.cgi?id=735598).
 
@@ -222,7 +222,7 @@ mount -t tmpfs -o size=1 tmpfs /var/cache/yum
 
 Build that image!
 
-    ./ami-creator/ami-creator -n centos62-x86_64 -c ks-centos6.cfg --cache yum_cache_62
+    ./ami_creator/ami_creator -n centos62-x86_64 -c ks-centos6.cfg --cache yum_cache_62
 
 This will pop out a `.img` file. You can inspect the contents, if you so wish.
 
@@ -247,7 +247,7 @@ Attach the new volume to our Fedora instance. The block device name of `sdi` is 
 
 ``` ruby
 fog.attach_volume(master.id, vol.id, "/dev/sdi")
-vol.wait_for { ready? }
+vol.wait_for { state == "in-use" }
 ```
 
 Create a single bootable Linux partition that spans the entire EBS volume.
@@ -287,7 +287,8 @@ Registering an AMI requires that you provide a snapshot of an EBS volume, rather
 snap = fog.snapshots.create(
     :name => @ami_name,
     :description => @ami_desc,
-    :volume_id => vol.id)
+    :volume_id => vol.id
+)
 snap.wait_for { ready? }
 ```
 

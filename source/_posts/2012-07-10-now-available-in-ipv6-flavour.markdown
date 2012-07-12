@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Now available in IPv6 flavour"
-date: 2012-07-11 07:14
+date: 2012-07-10 07:14
 comments: true
 categories: ops ipv6 linode
 ---

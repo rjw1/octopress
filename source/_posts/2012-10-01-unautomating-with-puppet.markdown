@@ -109,4 +109,6 @@ Now the process of changing an existing node's cookie requires a human to shutdo
 
 The use of Puppet's `fail()` function is quite brutal. It will prevent the entire catalog from being compiled and no resources will be managed. I've long pined after a way to deliberately fail a single resource on the client side - a soft failure of sorts. This would ensure that a single resource and those that depend on it wouldn't be modified, but the rest of the catalog would continue to be enforced. You could do something with an `if/else` condition and `notify{}` but it's not the same as generating an actual error.
 
+I've now filed feature request [#16647](https://projects.puppetlabs.com/issues/16647) for this functionality.
+
 The other thing to be aware of is that partial installs will require manual intervention. If the package has been pre-installed, or a Puppet agent bombs out between installing the package and copying the configuration file, then the config will need either removing or editing to continue. There is also a very minor risk that if the fact didn't copy or execute for some freak reason then the config would be unexpectedly replaced. But these are edge cases that probably aren't worth fretting about too much.

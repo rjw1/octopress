@@ -68,11 +68,13 @@ Bundler is the only Gem that you need install the traditional way. You will need
     gem install bundler
     rbenv rehash
 
-The following config tells Bundler to never share Gems between projects and that Gems should be installed in a `vendor/` directory parallel to `Gemfile`/`Gemfile.lock`. This will create a certain amount of duplication if you are using the same Gems in multiple projects, however I consider it to be a worthy trade-off. You could symlink the `vendor/cache` directories back to a common location if you didn't want to download the Gems each time.
+The following config will tell Bundler to install all Gems into a single
+path in your home directory. This isolates them from your normal system or
+rbenv Ruby install when you're not using Bundler.
 
 ``` sh ~/.bundle/config
 ---
-BUNDLE_PATH: vendor
+BUNDLE_PATH: ~/vendor/bundle
 BUNDLE_DISABLE_SHARED_GEMS: "1"
 ```
 
@@ -80,6 +82,13 @@ Now you can call Bundler as normal to install all of your project's dependencies
 
     bundle install
     rbenv rehash
+
+It's worth noting that once you've install a version of a Gem for one
+project it won't need to be re-downloaded for subsequent projects. At some
+stage you can use this to run Bundler without being connected to the
+internet.
+
+    bundle install --local
 
 ## Putting it together
 
